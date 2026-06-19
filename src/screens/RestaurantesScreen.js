@@ -1,4 +1,4 @@
-import React, { useState } from 'react';  
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -35,51 +35,45 @@ const RESTAURANTES_DATA = [
   },
 ];
 
-export default function App() {
-
+export default function RestaurantesScreen() {
   const [favoritos, setFavoritos] = useState([]);
-
 
   const toggleFavorito = (id) => {
     if (favoritos.includes(id)) {
-
       setFavoritos(favoritos.filter((favId) => favId !== id));
     } else {
-
       setFavoritos([...favoritos, id]);
     }
   };
 
   const renderItem = ({ item }) => {
-
     const isFavorito = favoritos.includes(item.id);
 
     return (
       <View style={styles.card}>
-    
         <View style={styles.imageContainer}>
           <Image source={item.image} style={styles.cardImage} />
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
             style={styles.favoriteButton}
             onPress={() => toggleFavorito(item.id)}
           >
-            <Ionicons 
+            <Ionicons
               name={isFavorito ? "heart" : "heart-outline"}
-              size={24} 
+              size={24}
               color={isFavorito ? "#9B2D3C" : "#FFF"}
             />
           </TouchableOpacity>
         </View>
-        
+
         <View style={styles.cardContent}>
           <Text style={styles.cardTitle}>{item.title}</Text>
-          
+
           <Text style={styles.cardDescription}>
             <Text style={styles.boldText}>A Experiência: </Text>
             {item.experiencia}
           </Text>
-          
+
           <Text style={styles.cardDescription}>
             <Text style={styles.boldText}>Ponto Forte: </Text>
             {item.pontoForte}
@@ -104,15 +98,6 @@ export default function App() {
         contentContainerStyle={styles.listContainer}
         showsVerticalScrollIndicator={false}
       />
-
-      <View style={styles.bottomNav}>
-        <Text style={styles.navItem}>Inicio</Text>
-        <Text style={styles.navItem}>Pontos turisticos</Text>
-        <View style={styles.navItemActiveContainer}>
-          <Text style={styles.navItemActive}>Restaurantes</Text>
-          <View style={styles.activeIndicator} />
-        </View>
-      </View>
     </SafeAreaView>
   );
 }
@@ -136,7 +121,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     padding: 16,
-    paddingBottom: 20,
+    paddingBottom: 30,
   },
   card: {
     flexDirection: 'row',
@@ -152,7 +137,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
- 
   imageContainer: {
     marginRight: 12,
     position: 'relative',
@@ -163,7 +147,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     resizeMode: 'cover',
   },
-  
   favoriteButton: {
     position: 'absolute',
     top: 6,
@@ -194,33 +177,5 @@ const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: 'bold',
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    backgroundColor: '#5A6F49',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  navItem: {
-    color: '#FFF',
-    fontSize: 14,
-    fontWeight: '500',
-  },
-  navItemActiveContainer: {
-    alignItems: 'center',
-  },
-  navItemActive: {
-    color: '#FFF',
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  activeIndicator: {
-    width: 20,
-    height: 3,
-    backgroundColor: '#FFF',
-    borderRadius: 2,
-    marginTop: 4,
   },
 });
